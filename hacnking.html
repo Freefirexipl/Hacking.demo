@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Cracking Simulation</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: white;
+            text-align: center;
+        }
+
+        .box {
+            background: #1e1e1e;
+            padding: 25px;
+            margin: 120px auto;
+            width: 350px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px black;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            padding: 10px;
+            width: 100%;
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #ff1a1a;
+        }
+
+        #loading {
+            display: none;
+            margin-top: 10px;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>💻 Password Cracking Simulation</h2>
+
+    <input type="password" id="pass" placeholder="Enter Password">
+    <button onclick="startHack()">Start Attack</button>
+
+    <p id="loading">⏳ Simulating brute force attack...</p>
+    <p id="result"></p>
+</div>
+
+<script>
+function startHack() {
+    let p = document.getElementById("pass").value;
+    let result = document.getElementById("result");
+    let loading = document.getElementById("loading");
+
+    result.innerHTML = "";
+    loading.style.display = "block";
+
+    setTimeout(() => {
+        loading.style.display = "none";
+
+        if (p.length < 6) {
+            result.innerHTML = "❌ Weak Password<br>✔ Cracked instantly using brute force attack!";
+        } 
+        else if (p.match(/[A-Z]/) && p.match(/[0-9]/) && p.match(/[@#$]/)) {
+            result.innerHTML = "✅ Strong Password<br>✔ Would take years to crack!";
+        } 
+        else {
+            result.innerHTML = "⚠️ Medium Password<br>✔ Cracked in few seconds using dictionary attack!";
+        }
+
+    }, 2000);
+}
+</script>
+
+</body>
+</html>
